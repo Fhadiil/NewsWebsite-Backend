@@ -17,8 +17,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class ArticleSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    author = CustomUserSerializer()
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
     image = serializers.SerializerMethodField()
     class Meta:
         model = Article

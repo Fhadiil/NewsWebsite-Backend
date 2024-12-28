@@ -19,7 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
-    image = serializers.SerializerMethodField()
+    image = serializers.ImageField(required=False)
     class Meta:
         model = Article
         fields = ['id','category','title', 'author', 'content', 'image', 'created_at']

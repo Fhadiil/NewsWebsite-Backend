@@ -22,5 +22,5 @@ def create_superuser_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('news.urls')),
-    path('create-superuser/', lambda request: (call_command('createsuperuser'), HttpResponse('Superuser created.'))),
+    path('create-superuser/', create_superuser_view),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

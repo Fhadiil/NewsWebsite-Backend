@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-vl@3k#nrm^%y)6034%qpah!(^%67@23##2b8^wd2q)hr9_km@!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'newswebsite-backend-d4ve.onrender.com'
+]
 
 
 # Application definition

@@ -3,6 +3,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.core.management import call_command
 from django.conf.urls.static import static
+from rest_framework.response import HttpResponse
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

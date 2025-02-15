@@ -15,6 +15,11 @@ import os
 import dj_database_url
 from datetime import timedelta
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,7 +98,13 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://admin:irFcFxRgA2oEjbUDAkGws80eA8CLhJvl@dpg-ctt8418gph6c738gkhb0-a.oregon-postgres.render.com/news_cws1')
+DATABASES = {
+    'default': dj_database_url.parse(
+        'postgresql://admin:RCaAaWmziXWS4QW8ehLKBTCa1clbetPW@dpg-cuohu29opnds738sog60-a.oregon-postgres.render.com/news_83gb',
+        conn_max_age=600,  
+        ssl_require=True 
+    )
+}
 
 
 # Password validation
@@ -148,4 +159,19 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # Ensure a short cache period for media
 MEDIA_CACHE_DURATION = timedelta(hours=1).total_seconds()
 
+# Cloudinary Configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dtwnz7fpd',
+    'API_KEY': '275884476683228',
+    'API_SECRET': 'v1jmv32dqyNUdvaLH8PKB0RFsKA',
+}
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE["CLOUD_NAME"],
+    api_key=CLOUDINARY_STORAGE["API_KEY"],
+    api_secret=CLOUDINARY_STORAGE["API_SECRET"]
+)
+
+# Use Cloudinary for media storage
+DEFAULT_FILE_STORAGE = 'cloudinary.CloudinaryStorage'
 

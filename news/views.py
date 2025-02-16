@@ -56,3 +56,15 @@ class ArticleDetailAPI(APIView):
         article = self.get_object(pk)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
+class ArticleByCategoryView(APIView):
+    def get(self, request, category_name):
+        try:
+            category = Category.objects.get(name__iexact=category_name)  # Case-insensitive match
+        except Category.DoesNotExist:
+            return Response({"error": "Category not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        articles = Article.objects.filter(category=category)
+        serializer = ArticleSerializer(articles, many=True, context={'request': request})
+        return Response(serializer.data)
